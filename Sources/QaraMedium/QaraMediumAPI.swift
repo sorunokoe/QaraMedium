@@ -53,7 +53,7 @@ public final class QaraMediumAPI {
         return await network.request(.me)
     }
     
-    public func create(article: QaraMediumArticle, authorId: String) async -> Result<QaraMediumResponse<String>, QaraMediumAPIError> {
+    public func create(article: QaraMediumArticle, authorId: String) async -> Result<QaraMediumResponse<QaraMediumPost>, QaraMediumAPIError> {
         return await network.request(.create(article: article, authorId: authorId))
     }
 

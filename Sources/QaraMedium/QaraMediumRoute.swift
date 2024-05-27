@@ -40,10 +40,10 @@ public enum QaraMediumRoute {
         switch self {
         case .create(let article, _):
             body["title"] = article.title
-            body["contentFormat"] = article.contentFormat
+            body["contentFormat"] = article.contentFormat.rawValue
             body["content"] = article.content
             body["tags"] = article.tags
-            body["publishStatus"] = article.publishStatus
+            body["publishStatus"] = article.publishStatus.rawValue
             if let canonicalUrl = article.canonicalUrl {
                 body["canonicalUrl"] = canonicalUrl
             }

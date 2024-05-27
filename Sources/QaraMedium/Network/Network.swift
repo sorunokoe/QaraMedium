@@ -32,18 +32,17 @@ final class QaraMediumNetwork: QaraMediumNetworkProtocol {
         request.httpMethod = route.method
         request.allHTTPHeaderFields = route.header
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
         if let body = route.body {
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
             } catch {
+                print(String(describing: error)) 
                 return .failure(.encodingError)
             }
         }
         print("📇", request)
 
         let result = try? await URLSession.shared.data(for: request)
-        
         
         guard let data = result?.0 else {
             return .failure(.noData)
@@ -53,11 +52,13 @@ final class QaraMediumNetwork: QaraMediumNetworkProtocol {
             print("📇", log)
         }
         
-        guard let response = try? JSONDecoder().decode(T.self, from: data) else {
+        do {
+            let response = try JSONDecoder().decode(T.self, from: data)
+            return .success(response)
+        } catch {
+            print(String(describing: error))
             return .failure(.decodingError)
         }
-        
-        return .success(response)
     }
     
 }
