@@ -8,8 +8,8 @@
 import Foundation
 
 public struct QaraMediumResponse<T: Decodable>: Decodable {
-    var data: T?
-    var errors: [QaraMediumError]?
+    public var data: T?
+    public var errors: [QaraMediumError]?
 }
 
 public struct QaraMediumError: Decodable {
