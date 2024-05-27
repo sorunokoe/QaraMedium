@@ -19,12 +19,17 @@ public enum ContentFormat: String {
 public struct QaraMediumArticle {
     var title: String
     var content: String
-    var contentFormat: ContentFormat = .html
-    var tags: [String] = []
-    var canonicalUrl: String? = nil
-    var publishStatus: PublishStatus = PublishStatus.draft
+    var contentFormat: ContentFormat
+    var tags: [String]
+    var canonicalUrl: String?
+    var publishStatus: PublishStatus
     
-    public init(title: String, content: String, contentFormat: ContentFormat, tags: [String], canonicalUrl: String? = nil, publishStatus: PublishStatus) {
+    public init(title: String, 
+                content: String,
+                contentFormat: ContentFormat = .html,
+                tags: [String] = [],
+                canonicalUrl: String? = nil,
+                publishStatus: PublishStatus = .draft) {
         self.title = title
         self.content = content
         self.contentFormat = contentFormat
