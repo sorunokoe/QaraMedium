@@ -14,7 +14,7 @@ public struct QaraMediumUser: Decodable {
     var url: String
     var imageUrl: String
     
-    public init(id: String, usernam e: String, name: String, url: String, imageUrl: String) {
+    public init(id: String, username: String, name: String, url: String, imageUrl: String) {
         self.id = id
         self.username = username
         self.name = name
