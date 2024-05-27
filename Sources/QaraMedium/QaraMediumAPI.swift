@@ -23,6 +23,15 @@ public struct QaraMediumArticle {
     var tags: [String] = []
     var canonicalUrl: String? = nil
     var publishStatus: PublishStatus = PublishStatus.draft
+    
+    public init(title: String, content: String, contentFormat: ContentFormat, tags: [String], canonicalUrl: String? = nil, publishStatus: PublishStatus) {
+        self.title = title
+        self.content = content
+        self.contentFormat = contentFormat
+        self.tags = tags
+        self.canonicalUrl = canonicalUrl
+        self.publishStatus = publishStatus
+    }
 }
 
 public final class QaraMediumAPI {
