@@ -40,10 +40,7 @@ final class QaraMediumNetwork: QaraMediumNetworkProtocol {
                 return .failure(.encodingError)
             }
         }
-        
-        #if DEBUG
         print("📇", request)
-        #endif
 
         let result = try? await URLSession.shared.data(for: request)
         
@@ -52,11 +49,9 @@ final class QaraMediumNetwork: QaraMediumNetworkProtocol {
             return .failure(.noData)
         }
         
-        #if DEBUG
         if let log = String(data: data, encoding: .utf8) {
             print("📇", log)
         }
-        #endif
         
         guard let response = try? JSONDecoder().decode(T.self, from: data) else {
             return .failure(.decodingError)
