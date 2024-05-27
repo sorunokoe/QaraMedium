@@ -11,11 +11,11 @@ public enum QaraMediumAPIError: Error {
     case encodingError, decodingError, invalidURL, noData
 }
 
-public protocol NetworkProtocol {
+public protocol QaraMediumNetworkProtocol {
     func request<T: Decodable>(_ route: QaraMediumRoute) async -> Result<T, QaraMediumAPIError>
 }
 
-final class Network: NetworkProtocol {
+final class QaraMediumNetwork: QaraMediumNetworkProtocol {
     
     let token: String
     

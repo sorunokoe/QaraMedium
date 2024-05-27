@@ -8,8 +8,8 @@ final class QaraMediumTests: XCTestCase {
     private var sut: QaraMediumAPI!
     
     override func setUp() async throws {
-        let network = Network(token: token)
-        sut = QaraMediumAPI(network: network, token: token)
+        let network = QaraMediumNetwork(token: token)
+        sut = QaraMediumAPI(token: token, network: network)
     }
     
     func testCreatingPost() async {

@@ -27,11 +27,11 @@ public struct QaraMediumArticle {
 
 public final class QaraMediumAPI {
     
-    private let network: NetworkProtocol
+    private let network: QaraMediumNetworkProtocol
     private let token: String
     
-    public init(network: NetworkProtocol, token: String) {
-        self.network = network
+    public init(token: String, network: QaraMediumNetworkProtocol? = nil) {
+        self.network = network ?? QaraMediumNetwork(token: token)
         self.token = token
     }
 
