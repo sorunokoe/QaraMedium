@@ -12,9 +12,15 @@ import Foundation
 public enum QaraMediumRoute {
     case create(article: QaraMediumArticle, authorId: String)
     case me
+    case posts(username: String)
     
     var baseURL: String {
-        return "https://api.medium.com/v1"
+        switch self {
+        case let .posts(username):
+            return "https://api.rss2json.com/v1"
+        default:
+            return "https://api.medium.com/v1"
+        }
     }
     
     var path: String {
@@ -23,6 +29,8 @@ public enum QaraMediumRoute {
             return "/users/\(authorId)/posts"
         case .me:
             return "/me"
+        case let .posts(username):
+            return "/api.json?rss_url=https://medium.com/feed/@\(username)"
         }
     }
     
@@ -30,7 +38,7 @@ public enum QaraMediumRoute {
         switch self {
         case .create:
             return "POST"
-        case .me:
+        case .me, .posts:
             return "GET"
         }
     }
@@ -47,7 +55,7 @@ public enum QaraMediumRoute {
             if let canonicalUrl = article.canonicalUrl {
                 body["canonicalUrl"] = canonicalUrl
             }
-        case .me:
+        case .me, .posts:
             return nil
         }
         return body
@@ -56,7 +64,7 @@ public enum QaraMediumRoute {
     var header: [String: String] {
         var header: [String: String] = [:]
         switch self {
-        case .create, .me:
+        case .create, .me, .posts:
             header["Content-Type"] = "application/json"
         }
         return header
